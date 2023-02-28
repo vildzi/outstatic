@@ -226,7 +226,15 @@ export default function EditDocument({ collection }: EditDocumentProps) {
     if (documentQueryObject?.__typename === 'Blob') {
       let mdContent = documentQueryObject.text as string
       const {
-        data: { title, publishedAt, status, description, coverImage, author },
+        data: {
+          title,
+          publishedAt,
+          status,
+          description,
+          coverImage,
+          author,
+          folder
+        },
         content
       } = matter(mdContent)
 
@@ -256,7 +264,8 @@ export default function EditDocument({ collection }: EditDocumentProps) {
         },
         slug,
         description,
-        coverImage
+        coverImage,
+        folder
       }
       methods.reset(document)
       editor.commands.setContent(parsedContent)
