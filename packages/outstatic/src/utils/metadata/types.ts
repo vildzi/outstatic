@@ -19,6 +19,7 @@ export type OutstaticSchema<
   description?: string
   coverImage?: string
   publishedAt: Date
+  folder?: string
   author?: {
     name?: string
     picture?: string
