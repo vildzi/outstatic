@@ -1,6 +1,6 @@
 {
-  "commit": "9e68c726b5b08dae4cfa654925f6f91f7e186ed8",
-  "generated": "2023-02-28T03:44:05.764Z",
+  "commit": "db79515bdd0be812e2516559dbc98eda477d9d4c",
+  "generated": "2023-02-28T03:44:57.080Z",
   "metadata": [
     {
       "__outstatic": {
@@ -158,6 +158,24 @@
       "publishedAt": "2022-03-17T05:35:07.322Z",
       "slug": "home",
       "title": "Home"
+    },
+    {
+      "__outstatic": {
+        "commit": "db79515bdd0be812e2516559dbc98eda477d9d4c",
+        "hash": "2150706834",
+        "path": "outstatic/content/projects/couple-pizza.md"
+      },
+      "author": {
+        "name": "Bob Marley",
+        "picture": ""
+      },
+      "collection": "projects",
+      "coverImage": "/images/couple-pizza.png",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "folder": "",
+      "publishedAt": "2022-03-16T05:35:07.322Z",
+      "slug": "couple-pizza",
+      "title": "Couple Pizza"
     }
   ]
 }
