@@ -11,6 +11,7 @@ export type Document = {
   content: string
   status: 'published' | 'draft'
   slug: string
+  folder?: string
   description?: string
   coverImage?: string
 }

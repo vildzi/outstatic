@@ -144,6 +144,15 @@ const DocumentSettings = ({
             }}
           />
         </Accordion>
+        <Accordion title="Folder">
+          <Input
+            label="Assign a folder (optional)"
+            name="folder"
+            id="folder"
+            defaultValue={document.folder}
+            inputSize="small"
+          />
+        </Accordion>
         <Accordion title="Description">
           <TextArea
             name="description"
