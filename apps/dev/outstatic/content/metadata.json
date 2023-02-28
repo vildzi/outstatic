@@ -1,6 +1,6 @@
 {
-  "commit": "db79515bdd0be812e2516559dbc98eda477d9d4c",
-  "generated": "2023-02-28T03:44:57.080Z",
+  "commit": "d17675cc98f9ef026d77e376dd2e6174d549a26f",
+  "generated": "2023-02-28T05:00:45.483Z",
   "metadata": [
     {
       "__outstatic": {
@@ -176,6 +176,24 @@
       "publishedAt": "2022-03-16T05:35:07.322Z",
       "slug": "couple-pizza",
       "title": "Couple Pizza"
+    },
+    {
+      "__outstatic": {
+        "commit": "d17675cc98f9ef026d77e376dd2e6174d549a26f",
+        "hash": "1527942867",
+        "path": "outstatic/content/pages/home.md"
+      },
+      "author": {
+        "name": "Andre Vitorio",
+        "picture": ""
+      },
+      "collection": "pages",
+      "coverImage": "",
+      "description": "This is my blog.",
+      "folder": "",
+      "publishedAt": "2022-03-17T05:35:07.322Z",
+      "slug": "home",
+      "title": "Home"
     }
   ]
 }
