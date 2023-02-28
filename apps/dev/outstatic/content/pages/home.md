@@ -7,13 +7,12 @@ author:
 slug: 'home'
 description: 'This is my blog.'
 coverImage: ''
-folder: 'test-folder'
+folder: ''
 publishedAt: '2022-03-17T05:35:07.322Z'
 ---
 
-## Hello!
+## Hello! testing!
 
 # I'm Andre, nice to meet you.
 
 I am a surfer + musician + software developer + designer + online marketer and whatever else I can cram into this existence.
-
