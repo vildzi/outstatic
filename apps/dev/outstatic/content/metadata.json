@@ -1,6 +1,6 @@
 {
   "commit": "baeb15f8eabe3d1598c16524fd5efd01d3c1be7e",
-  "generated": "2023-04-20T22:43:33.693Z",
+  "generated": "2023-04-20T22:44:06.449Z",
   "metadata": [
     {
       "__outstatic": {
@@ -131,7 +131,7 @@
     {
       "__outstatic": {
         "commit": "baeb15f8eabe3d1598c16524fd5efd01d3c1be7e",
-        "hash": "3936610673",
+        "hash": "302721407",
         "path": "outstatic/content/posts/nothing-wrong.md"
       },
       "author": {
@@ -139,7 +139,7 @@
         "picture": ""
       },
       "collection": "posts",
-      "coverImage": "https://notify.org/logo.png",
+      "coverImage": "blob:http://localhost:3001/9ac9d39f-f9fd-4ce4-a51b-ca7d0fac3b81",
       "description": "One more day, one more joy. I feel blessed.",
       "publishedAt": "2022-09-14T17:55:40.452Z",
       "slug": "nothing-wrong",

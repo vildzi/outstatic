@@ -6,7 +6,7 @@ author:
   picture: ''
 slug: 'nothing-wrong'
 description: 'One more day, one more joy. I feel blessed.'
-coverImage: 'https://notify.org/logo.png'
+coverImage: '/images/89ec6d08-e14f-4d86-9392-a81559594330-c3Nj.png'
 publishedAt: '2022-09-14T17:55:40.452Z'
 ---
 
