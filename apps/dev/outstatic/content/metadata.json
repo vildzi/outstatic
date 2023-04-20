@@ -1,6 +1,6 @@
 {
-  "commit": "baeb15f8eabe3d1598c16524fd5efd01d3c1be7e",
-  "generated": "2023-04-20T22:44:06.449Z",
+  "commit": "a00be1f1720773ea307cd45962b7179deabb07ae",
+  "generated": "Thu, 20 Apr 2023 22:46:15 GMT",
   "metadata": [
     {
       "__outstatic": {
@@ -59,6 +59,24 @@
     },
     {
       "__outstatic": {
+        "commit": "6b38962ed7d7a2abaf4571dc898a334d1ddfa2bb",
+        "hash": "302721407",
+        "path": "/outstatic/content/posts/nothing-wrong.md"
+      },
+      "author": {
+        "name": "Andre Vitorio",
+        "picture": ""
+      },
+      "collection": "posts",
+      "coverImage": "/images/89ec6d08-e14f-4d86-9392-a81559594330-c3Nj.png",
+      "description": "One more day, one more joy. I feel blessed.",
+      "publishedAt": "2022-09-14T17:55:40.452Z",
+      "slug": "nothing-wrong",
+      "status": "published",
+      "title": "Nothing is wrong. Everything is perfect"
+    },
+    {
+      "__outstatic": {
         "commit": "caeb954ea1579e04b6b74c80ddf718e56c60a67d",
         "hash": "1076515129",
         "path": "/outstatic/content/projects/bearbnb.md"
@@ -73,25 +91,6 @@
       "slug": "bearbnb",
       "status": "published",
       "title": " 🧸 Bearbnb"
-    },
-    {
-      "__outstatic": {
-        "commit": "e5200af210148834aee909a66b4e6abd9577253e",
-        "hash": "376952074",
-        "path": "/outstatic/content/posts/nothing-wrong.md"
-      },
-      "author": {
-        "name": "Andre Vitorio",
-        "picture": ""
-      },
-      "collection": "posts",
-      "coverImage": "/images/industrial-pattern.png",
-      "description": "One more day, one more joy. I feel blessed.",
-      "folder": "test-folder",
-      "publishedAt": "2022-09-14T17:55:40.452Z",
-      "slug": "nothing-wrong",
-      "status": "published",
-      "title": "Nothing is wrong. Everything is perfect"
     },
     {
       "__outstatic": {
@@ -127,23 +126,6 @@
       "slug": "the-wrong-decision",
       "status": "published",
       "title": "If you want to make the wrong decision, ask everyone"
-    },
-    {
-      "__outstatic": {
-        "commit": "baeb15f8eabe3d1598c16524fd5efd01d3c1be7e",
-        "hash": "302721407",
-        "path": "outstatic/content/posts/nothing-wrong.md"
-      },
-      "author": {
-        "name": "Andre Vitorio",
-        "picture": ""
-      },
-      "collection": "posts",
-      "coverImage": "blob:http://localhost:3001/9ac9d39f-f9fd-4ce4-a51b-ca7d0fac3b81",
-      "description": "One more day, one more joy. I feel blessed.",
-      "publishedAt": "2022-09-14T17:55:40.452Z",
-      "slug": "nothing-wrong",
-      "title": "Nothing is wrong. Everything is perfect"
     }
   ]
 }
