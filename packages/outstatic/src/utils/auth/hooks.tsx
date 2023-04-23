@@ -10,7 +10,7 @@ type useOstSessionProps = {
 
 type useOstSessionReturn = {
   session: Session | null
-  status: 'loading' | 'unauthenticated' | 'authenticated'
+  status: 'loading' | 'unauthenticated' | 'authenticated' | 'error'
 }
 
 const fetcher = (url: string) =>
@@ -26,7 +26,9 @@ export const useOstSession = ({
   redirectTo,
   redirectIfFound
 }: useOstSessionProps = {}): useOstSessionReturn => {
-  const { data, error } = useSWR('/api/outstatic/user', fetcher)
+  const { data, error } = useSWR('/api/outstatic/user', fetcher, {
+    revalidateOnFocus: false
+  })
   const session = data?.session as Session
   const finished = Boolean(data)
   const hasUser = Boolean(session)
@@ -50,10 +52,17 @@ export const useOstSession = ({
     }
   }
 
-  if ((data && !hasUser) || error) {
+  if (data && !hasUser) {
     return {
       session: null,
       status: 'unauthenticated'
+    }
+  }
+
+  if (error) {
+    return {
+      session: null,
+      status: 'error'
     }
   }
 
