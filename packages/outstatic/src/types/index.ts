@@ -13,6 +13,7 @@ export type Document = {
   slug: string
   description?: string
   coverImage?: string
+  tags?: string[]
 }
 
 export type FileType = {

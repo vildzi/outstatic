@@ -9,6 +9,7 @@ import DeleteDocumentButton from '../DeleteDocumentButton'
 import Input from '../Input'
 import TextArea from '../TextArea'
 import DocumentSettingsImageSelection from '../DocumentSettingsImageSelection'
+import DocumentSettingsTagInput from '../DocumentSettingsTagInput'
 
 type DocumentSettingsProps = {
   saveFunc: () => void
@@ -160,6 +161,10 @@ const DocumentSettings = ({
             name="coverImage"
             description="Cover Image"
           />
+        </Accordion>
+
+        <Accordion title="Tags">
+          <DocumentSettingsTagInput />
         </Accordion>
       </div>
       <hr className="pb-16" />

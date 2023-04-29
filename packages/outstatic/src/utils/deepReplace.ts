@@ -16,9 +16,7 @@ export const deepReplace = (
   const lastKey = keys.pop() as string
   const lastObj = keys.reduce((clone, key) => clone[key], clone)
   try {
-    if (lastObj[lastKey] !== undefined) {
-      lastObj[lastKey] = value
-    }
+    lastObj[lastKey] = value
   } catch {
     console.log(`Key ${key} not found`)
   }
