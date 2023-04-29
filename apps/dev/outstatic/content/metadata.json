@@ -1,6 +1,6 @@
 {
-  "commit": "5281e6865a686ed9420ffe9c33135243a59b194e",
-  "generated": "Sat, 29 Apr 2023 21:41:03 GMT",
+  "commit": "e7ff84ce13f2076bf5f2bea19841d18ccf7c61b9",
+  "generated": "2023-04-29T21:41:18.035Z",
   "metadata": [
     {
       "__outstatic": {
@@ -108,24 +108,6 @@
       "slug": "nothing-wrong",
       "status": "published",
       "title": "Nothing is wrong. Everything is perfect"
-    },
-    {
-      "__outstatic": {
-        "commit": "b22b0f4f3d38a659cbab9b89ac2b7394f2446de4",
-        "hash": "425893791",
-        "path": "/outstatic/content/projects/flycream-travel.md"
-      },
-      "author": {
-        "name": "Andre Vitorio",
-        "picture": "https://avatars.githubusercontent.com/u/1417109?v=4"
-      },
-      "collection": "projects",
-      "coverImage": "/images/flycream-travel.png",
-      "description": "One more day, one more joy. I feel blessed.",
-      "publishedAt": "2022-09-14T17:55:40.452Z",
-      "slug": "flycream-travel",
-      "status": "published",
-      "title": "Flycream Travel"
     }
   ]
 }
