@@ -1,6 +1,6 @@
 {
-  "commit": "a00be1f1720773ea307cd45962b7179deabb07ae",
-  "generated": "Thu, 20 Apr 2023 22:46:15 GMT",
+  "commit": "5281e6865a686ed9420ffe9c33135243a59b194e",
+  "generated": "Sat, 29 Apr 2023 21:41:03 GMT",
   "metadata": [
     {
       "__outstatic": {
@@ -37,6 +37,40 @@
       "slug": "home",
       "status": "published",
       "title": "Home"
+    },
+    {
+      "__outstatic": {
+        "commit": "caeb954ea1579e04b6b74c80ddf718e56c60a67d",
+        "hash": "1076515129",
+        "path": "/outstatic/content/projects/bearbnb.md"
+      },
+      "author": {
+        "name": "Andre Vitorio"
+      },
+      "collection": "projects",
+      "coverImage": "/images/bearbnb.png",
+      "description": "Amazing rental locations for your teddy bear.",
+      "publishedAt": "2022-03-17T05:35:07.322Z",
+      "slug": "bearbnb",
+      "status": "published",
+      "title": " 🧸 Bearbnb"
+    },
+    {
+      "__outstatic": {
+        "commit": "998b7f74af83e46bbdb4ab5302c8e4c39963278f",
+        "hash": "3707858083",
+        "path": "/outstatic/content/posts/the-wrong-decision.md"
+      },
+      "author": {
+        "name": "Naval Ravikant"
+      },
+      "collection": "posts",
+      "coverImage": "/images/skyline.png",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "publishedAt": "2022-03-26T05:35:07.322Z",
+      "slug": "the-wrong-decision",
+      "status": "published",
+      "title": "If you want to make the wrong decision, ask everyone"
     },
     {
       "__outstatic": {
@@ -77,23 +111,6 @@
     },
     {
       "__outstatic": {
-        "commit": "caeb954ea1579e04b6b74c80ddf718e56c60a67d",
-        "hash": "1076515129",
-        "path": "/outstatic/content/projects/bearbnb.md"
-      },
-      "author": {
-        "name": "Andre Vitorio"
-      },
-      "collection": "projects",
-      "coverImage": "/images/bearbnb.png",
-      "description": "Amazing rental locations for your teddy bear.",
-      "publishedAt": "2022-03-17T05:35:07.322Z",
-      "slug": "bearbnb",
-      "status": "published",
-      "title": " 🧸 Bearbnb"
-    },
-    {
-      "__outstatic": {
         "commit": "b22b0f4f3d38a659cbab9b89ac2b7394f2446de4",
         "hash": "425893791",
         "path": "/outstatic/content/projects/flycream-travel.md"
@@ -109,23 +126,6 @@
       "slug": "flycream-travel",
       "status": "published",
       "title": "Flycream Travel"
-    },
-    {
-      "__outstatic": {
-        "commit": "998b7f74af83e46bbdb4ab5302c8e4c39963278f",
-        "hash": "3707858083",
-        "path": "/outstatic/content/posts/the-wrong-decision.md"
-      },
-      "author": {
-        "name": "Naval Ravikant"
-      },
-      "collection": "posts",
-      "coverImage": "/images/skyline.png",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-      "publishedAt": "2022-03-26T05:35:07.322Z",
-      "slug": "the-wrong-decision",
-      "status": "published",
-      "title": "If you want to make the wrong decision, ask everyone"
     }
   ]
 }
