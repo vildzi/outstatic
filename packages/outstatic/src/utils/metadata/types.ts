@@ -24,6 +24,7 @@ export type OutstaticSchema<
     name?: string
     picture?: string
   }
+  tags?: string[]
   __outstatic: {
     hash: string
     path: string

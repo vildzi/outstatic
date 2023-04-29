@@ -14,6 +14,7 @@ export type Document = {
   folder?: string
   description?: string
   coverImage?: string
+  tags?: string[]
 }
 
 export type FileType = {

@@ -22,5 +22,6 @@ export const editDocumentSchema: yup.SchemaOf<Document> = yup.object().shape({
     )
     .required(),
   description: yup.string(),
-  coverImage: yup.string()
+  coverImage: yup.string(),
+  tags: yup.array().of(yup.string())
 })
