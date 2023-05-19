@@ -8,23 +8,62 @@ import DateTimePicker from '../DateTimePicker'
 import DeleteDocumentButton from '../DeleteDocumentButton'
 import Input from '../Input'
 import TextArea from '../TextArea'
+import TagInput from '../TagInput'
 import DocumentSettingsImageSelection from '../DocumentSettingsImageSelection'
-import DocumentSettingsTagInput from '../DocumentSettingsTagInput'
+import {
+  CustomFieldArrayValue,
+  CustomFields,
+  isArrayCustomField
+} from '../../types'
 
 type DocumentSettingsProps = {
   saveFunc: () => void
   loading: boolean
-  validation?: RegisterOptions
+  registerOptions?: RegisterOptions
   showDelete: boolean
+  customFields?: CustomFields
+}
+
+interface InputProps {
+  type?: 'text' | 'number'
+  suggestions?: CustomFieldArrayValue[]
+}
+
+type ComponentType = {
+  component: typeof Input | typeof TextArea | typeof TagInput
+  props: InputProps
+}
+
+type FieldDataMapType = {
+  String: ComponentType
+  Text: ComponentType
+  Number: ComponentType
+  Tags: ComponentType
+}
+
+const FieldDataMap: FieldDataMapType = {
+  String: { component: Input, props: { type: 'text' } },
+  Text: { component: TextArea, props: {} },
+  Number: { component: Input, props: { type: 'number' } },
+  Tags: {
+    component: TagInput,
+    props: {
+      suggestions: []
+    }
+  }
 }
 
 const DocumentSettings = ({
   saveFunc,
   loading,
-  validation,
-  showDelete
+  registerOptions,
+  showDelete,
+  customFields = {}
 }: DocumentSettingsProps) => {
-  const { register } = useFormContext()
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext()
   const router = useRouter()
   const { document, editDocument, hasChanges, collection } =
     useContext(DocumentContext)
@@ -47,7 +86,7 @@ const DocumentSettings = ({
           Status
         </label>
         <select
-          {...register('status', validation)}
+          {...register('status', registerOptions)}
           name="status"
           id="status"
           defaultValue={document.status}
@@ -132,7 +171,7 @@ const DocumentSettings = ({
             id="slug"
             defaultValue={document.slug}
             inputSize="small"
-            validation={{
+            registerOptions={{
               onChange: (e) => {
                 const lastChar = e.target.value.slice(-1)
                 editDocument(
@@ -143,15 +182,6 @@ const DocumentSettings = ({
                 )
               }
             }}
-          />
-        </Accordion>
-        <Accordion title="Folder">
-          <Input
-            label="Assign a folder (optional)"
-            name="folder"
-            id="folder"
-            defaultValue={document.folder}
-            inputSize="small"
           />
         </Accordion>
         <Accordion title="Description">
@@ -171,10 +201,26 @@ const DocumentSettings = ({
             description="Cover Image"
           />
         </Accordion>
-
-        <Accordion title="Tags">
-          <DocumentSettingsTagInput />
-        </Accordion>
+        {customFields &&
+          Object.entries(customFields).map(([name, field]) => {
+            const Field = FieldDataMap[field.fieldType]
+            if (isArrayCustomField(field)) {
+              Field.props.suggestions = field.values
+            }
+            return (
+              <Accordion
+                key={name}
+                title={`${field.title}${field.required ? '*' : ''}`}
+                error={!!errors[name]?.message}
+              >
+                <Field.component
+                  id={name}
+                  label={field.description}
+                  {...Field.props}
+                />
+              </Accordion>
+            )
+          })}
       </div>
       <hr className="pb-16" />
     </aside>

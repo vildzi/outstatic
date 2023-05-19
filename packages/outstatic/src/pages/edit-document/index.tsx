@@ -13,11 +13,14 @@ import {
   DocumentTitleInput
 } from '../../components'
 import { OutstaticContext, DocumentContext } from '../../context'
+import { useCreateCommitMutation } from '../../graphql/generated'
 import {
-  useCreateCommitMutation,
-  useDocumentQuery
-} from '../../graphql/generated'
-import { Document, FileType } from '../../types'
+  CustomFieldArrayValue,
+  CustomFields,
+  Document,
+  FileType,
+  isArrayCustomField
+} from '../../types'
 import { useOstSession } from '../../utils/auth/hooks'
 import { IMAGES_PATH } from '../../utils/constants'
 import { deepReplace } from '../../utils/deepReplace'
@@ -28,13 +31,14 @@ import { replaceImageSrcRoot } from '../../utils/replaceImageSrc'
 import useNavigationLock from '../../utils/useNavigationLock'
 import useOid from '../../utils/useOid'
 import useTipTap from '../../utils/useTipTap'
-import { editDocumentSchema } from '../../utils/yup'
+import { convertSchemaToYup, editDocumentSchema } from '../../utils/yup'
 import { createCommit as createCommitApi } from '../../utils/createCommit'
 import { assertUnreachable } from '../../utils/assertUnreachable'
 import { MetadataSchema } from '../../utils/metadata/types'
 import { hashFromUrl } from '../../utils/hashFromUrl'
 import MurmurHash3 from 'imurmurhash'
 import { stringifyMetadata } from '../../utils/metadata/stringify'
+import useFileQuery from '../../utils/useFileQuery'
 
 type EditDocumentProps = {
   collection: string
@@ -52,10 +56,12 @@ export default function EditDocument({ collection }: EditDocumentProps) {
   const [createCommit] = useCreateCommitMutation()
   const fetchOid = useOid()
   const [showDelete, setShowDelete] = useState(false)
+  const [documentSchema, setDocumentSchema] = useState(editDocumentSchema)
   const methods = useForm<Document>({
-    resolver: yupResolver(editDocumentSchema)
+    resolver: yupResolver(documentSchema)
   })
   const { editor } = useTipTap({ ...methods })
+  const [customFields, setCustomFields] = useState<CustomFields>({})
 
   const editDocument = (property: string, value: any) => {
     const formValues = methods.getValues()
@@ -63,27 +69,17 @@ export default function EditDocument({ collection }: EditDocumentProps) {
     methods.reset(newValue)
   }
 
-  const { data: documentQueryData } = useDocumentQuery({
-    variables: {
-      owner: repoOwner || session?.user?.login || '',
-      name: repoSlug,
-      filePath: `${repoBranch}:${
-        monorepoPath ? monorepoPath + '/' : ''
-      }${contentPath}/${collection}/${slug}.md`
-    },
-    fetchPolicy: 'network-only',
+  const { data: documentQueryData } = useFileQuery({
+    file: `${collection}/${slug}.md`,
     skip: slug === 'new' || !slug
   })
 
-  const { data: metadata } = useDocumentQuery({
-    variables: {
-      owner: repoOwner || session?.user?.login || '',
-      name: repoSlug,
-      filePath: `${repoBranch}:${
-        monorepoPath ? monorepoPath + '/' : ''
-      }${contentPath}/metadata.json`
-    },
-    fetchPolicy: 'network-only'
+  const { data: schemaQueryData } = useFileQuery({
+    file: `${collection}/schema.json`
+  })
+
+  const { data: metadata } = useFileQuery({
+    file: `metadata.json`
   })
 
   const onSubmit = async (data: Document) => {
@@ -160,6 +156,54 @@ export default function EditDocument({ collection }: EditDocumentProps) {
         content
       )
 
+      // Check if a new tag value was added
+      let hasNewTag = false
+      Object.entries(customFields).forEach(([key, field]) => {
+        const customField = customFields[key]
+
+        // Only check for new values in array fields
+        if (isArrayCustomField(field) && isArrayCustomField(customField)) {
+          // @ts-ignore
+          data[key].forEach((selectedTag: CustomFieldArrayValue) => {
+            // Check if the selected tag already exists
+            const exists = field.values.some(
+              (savedTag: CustomFieldArrayValue) =>
+                savedTag.value === selectedTag.value
+            )
+
+            // If the selected tag does not exist, add it
+            if (!exists) {
+              customField.values.push({
+                value: selectedTag.value,
+                label: selectedTag.label
+              })
+              customFields[key] = customField
+              setCustomFields({ ...customFields })
+              hasNewTag = true
+            }
+          })
+        }
+      })
+
+      if (hasNewTag) {
+        const customFieldsJSON = JSON.stringify(
+          {
+            title: collection,
+            type: 'object',
+            properties: { ...customFields }
+          },
+          null,
+          2
+        )
+
+        capi.replaceFile(
+          `${
+            monorepoPath ? monorepoPath + '/' : ''
+          }${contentPath}/${collection}/schema.json`,
+          customFieldsJSON + '\n'
+        )
+      }
+
       // update metadata for this post
       // requires final content for hashing
       if (metadata?.repository?.object?.__typename === 'Blob') {
@@ -228,18 +272,7 @@ export default function EditDocument({ collection }: EditDocumentProps) {
 
     if (documentQueryObject?.__typename === 'Blob') {
       let mdContent = documentQueryObject.text as string
-      const {
-        data: {
-          title,
-          publishedAt,
-          status,
-          description,
-          coverImage,
-          author,
-          folder
-        },
-        content
-      } = matter(mdContent)
+      const { data, content } = matter(mdContent)
 
       const parseContent = () => {
         const converter = new showdown.Converter({ noHeaderId: true })
@@ -255,20 +288,14 @@ export default function EditDocument({ collection }: EditDocumentProps) {
 
       const parsedContent = parseContent()
 
-      const newDate = publishedAt ? new Date(publishedAt) : getLocalDate()
+      const newDate = data.publishedAt
+        ? new Date(data.publishedAt)
+        : getLocalDate()
       const document = {
-        title,
+        ...data,
         publishedAt: newDate,
         content: parsedContent,
-        status,
-        author: {
-          name: author?.name,
-          picture: author?.picture || ''
-        },
-        slug,
-        description,
-        coverImage,
-        folder
+        slug
       }
       methods.reset(document)
       editor.commands.setContent(parsedContent)
@@ -295,6 +322,16 @@ export default function EditDocument({ collection }: EditDocumentProps) {
 
     return () => subscription.unsubscribe()
   }, [documentQueryData, methods, slug, editor, session])
+
+  useEffect(() => {
+    const documentQueryObject = schemaQueryData?.repository?.object
+    if (documentQueryObject?.__typename === 'Blob') {
+      const schema = JSON.parse(documentQueryObject?.text || '{}')
+      const yupSchema = convertSchemaToYup(schema)
+      setDocumentSchema(yupSchema)
+      setCustomFields(schema.properties)
+    }
+  }, [schemaQueryData])
 
   // Ask for confirmation before leaving page if changes were made.
   useNavigationLock(hasChanges)
@@ -333,6 +370,7 @@ export default function EditDocument({ collection }: EditDocumentProps) {
                 loading={loading}
                 saveFunc={methods.handleSubmit(onSubmit)}
                 showDelete={showDelete}
+                customFields={customFields}
               />
             }
           >
