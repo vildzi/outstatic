@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "folder": {
-      "required": true,
+      "required": false,
       "description": "",
       "fieldType": "String",
       "dataType": "string",
