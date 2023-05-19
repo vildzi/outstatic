@@ -15,7 +15,16 @@
       "fieldType": "Tags",
       "dataType": "array",
       "title": "Tags",
-      "values": []
+      "values": [
+        {
+          "value": "testTag",
+          "label": "test tag"
+        },
+        {
+          "value": "featured",
+          "label": "Featured"
+        }
+      ]
     }
   }
 }

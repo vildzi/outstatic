@@ -7,6 +7,7 @@ slug: 'nothing-wrong'
 description: 'One more day, one more joy. I feel blessed.'
 coverImage: '/images/industrial-pattern.png'
 folder: 'test'
+tags: [{"label":"test tag","value":"testTag"},{"label":"Featured","value":"featured"}]
 publishedAt: '2022-09-14T17:55:40.452Z'
 ---
 
