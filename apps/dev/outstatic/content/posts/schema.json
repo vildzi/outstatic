@@ -1,0 +1,30 @@
+{
+  "title": "posts",
+  "type": "object",
+  "properties": {
+    "folder": {
+      "required": false,
+      "description": "",
+      "fieldType": "String",
+      "dataType": "string",
+      "title": "Folder"
+    },
+    "tags": {
+      "required": false,
+      "description": "tags",
+      "fieldType": "Tags",
+      "dataType": "array",
+      "title": "Tags",
+      "values": [
+        {
+          "value": "testTag",
+          "label": "test tag"
+        },
+        {
+          "value": "featured",
+          "label": "Featured"
+        }
+      ]
+    }
+  }
+}
